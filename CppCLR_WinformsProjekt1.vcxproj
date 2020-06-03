@@ -143,10 +143,17 @@
     <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Birth.h" />
+    <ClInclude Include="Citizen.h" />
     <ClInclude Include="Form1.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="ListCitizen.h" />
+    <ClInclude Include="ListRegisteredCitizen.h" />
+    <ClInclude Include="NodeCitizen.h" />
+    <ClInclude Include="NodeRegisteredCitizen.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="RegisteredCitizen.h" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
