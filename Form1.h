@@ -1,4 +1,7 @@
 #pragma once
+#include <msclr\marshal_cppstd.h>
+#include <fstream>
+#include "MyForm.h"
 
 namespace CppCLRWinformsProjekt {
 
@@ -18,6 +21,7 @@ namespace CppCLRWinformsProjekt {
 		Form1(void)
 		{
 			InitializeComponent();
+			this->list_citizens = new list_citizen;
 			//
 			//TODO: Konstruktorcode hier hinzufьgen.
 			//
@@ -34,6 +38,7 @@ namespace CppCLRWinformsProjekt {
 				delete components;
 			}
 		}
+	private: list_citizen* list_citizens;
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	protected:
 	private: System::Windows::Forms::ToolStripMenuItem^ файлToolStripMenuItem;
@@ -79,7 +84,7 @@ namespace CppCLRWinformsProjekt {
 
 
 
-	private: System::Windows::Forms::ListBox^ listBox1;
+
 	private: System::Windows::Forms::DataGridViewButtonColumn^ Column8;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ Column9;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
@@ -87,6 +92,9 @@ namespace CppCLRWinformsProjekt {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ Column10;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ Column11;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
+	private: System::Windows::Forms::BindingSource^ bindingSource1;
+	private: System::Windows::Forms::ErrorProvider^ errorProvider1;
 
 	protected:
 	private: System::ComponentModel::IContainer^ components;
@@ -106,6 +114,7 @@ namespace CppCLRWinformsProjekt {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->файлToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->открытьToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -126,6 +135,8 @@ namespace CppCLRWinformsProjekt {
 			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column10 = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->Column11 = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label5 = (gcnew System::Windows::Forms::Label());
@@ -137,7 +148,7 @@ namespace CppCLRWinformsProjekt {
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
-			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->radioButton3 = (gcnew System::Windows::Forms::RadioButton());
 			this->radioButton2 = (gcnew System::Windows::Forms::RadioButton());
@@ -148,8 +159,8 @@ namespace CppCLRWinformsProjekt {
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
-			this->Column10 = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
-			this->Column11 = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
+			this->errorProvider1 = (gcnew System::Windows::Forms::ErrorProvider(this->components));
 			this->menuStrip1->SuspendLayout();
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
@@ -159,6 +170,8 @@ namespace CppCLRWinformsProjekt {
 			this->tabPage2->SuspendLayout();
 			this->tabPage3->SuspendLayout();
 			this->groupBox1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
@@ -223,6 +236,8 @@ namespace CppCLRWinformsProjekt {
 			// 
 			// dataGridView1
 			// 
+			this->dataGridView1->AllowUserToAddRows = false;
+			this->dataGridView1->AllowUserToDeleteRows = false;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
 				this->Column1,
@@ -230,38 +245,50 @@ namespace CppCLRWinformsProjekt {
 			});
 			this->dataGridView1->Location = System::Drawing::Point(0, 0);
 			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->ReadOnly = true;
 			this->dataGridView1->Size = System::Drawing::Size(642, 384);
 			this->dataGridView1->TabIndex = 0;
+			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Form1::dataGridView1_CellContentClick);
 			// 
 			// Column1
 			// 
 			this->Column1->HeaderText = L"ФИО";
 			this->Column1->Name = L"Column1";
+			this->Column1->ReadOnly = true;
 			// 
 			// Column2
 			// 
 			this->Column2->HeaderText = L"Номер квартиры";
 			this->Column2->Name = L"Column2";
+			this->Column2->ReadOnly = true;
 			// 
 			// Column3
 			// 
 			this->Column3->HeaderText = L"Площадь квартиры";
 			this->Column3->Name = L"Column3";
+			this->Column3->ReadOnly = true;
 			// 
 			// Column4
 			// 
 			this->Column4->HeaderText = L"Этаж";
 			this->Column4->Name = L"Column4";
+			this->Column4->ReadOnly = true;
 			// 
 			// Column8
 			// 
 			this->Column8->HeaderText = L"Изменение";
 			this->Column8->Name = L"Column8";
+			this->Column8->ReadOnly = true;
+			this->Column8->Text = L"Изменить";
+			this->Column8->UseColumnTextForButtonValue = true;
 			// 
 			// Column9
 			// 
 			this->Column9->HeaderText = L"Удаление";
 			this->Column9->Name = L"Column9";
+			this->Column9->ReadOnly = true;
+			this->Column9->Text = L"Удалить";
+			this->Column9->UseColumnTextForButtonValue = true;
 			// 
 			// tabPage4
 			// 
@@ -275,6 +302,9 @@ namespace CppCLRWinformsProjekt {
 			// 
 			// dataGridView2
 			// 
+			this->dataGridView2->AllowUserToAddRows = false;
+			this->dataGridView2->AllowUserToDeleteRows = false;
+			this->dataGridView2->AllowUserToOrderColumns = true;
 			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
 				this->Column5,
@@ -282,24 +312,41 @@ namespace CppCLRWinformsProjekt {
 			});
 			this->dataGridView2->Location = System::Drawing::Point(0, 0);
 			this->dataGridView2->Name = L"dataGridView2";
+			this->dataGridView2->ReadOnly = true;
 			this->dataGridView2->RowTemplate->ReadOnly = true;
 			this->dataGridView2->Size = System::Drawing::Size(639, 384);
 			this->dataGridView2->TabIndex = 0;
+			this->dataGridView2->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Form1::dataGridView2_CellContentClick);
 			// 
 			// Column5
 			// 
 			this->Column5->HeaderText = L"ФИО";
 			this->Column5->Name = L"Column5";
+			this->Column5->ReadOnly = true;
 			// 
 			// Column6
 			// 
 			this->Column6->HeaderText = L"Дата рождения";
 			this->Column6->Name = L"Column6";
+			this->Column6->ReadOnly = true;
 			// 
 			// Column7
 			// 
 			this->Column7->HeaderText = L"Род занятий";
 			this->Column7->Name = L"Column7";
+			this->Column7->ReadOnly = true;
+			// 
+			// Column10
+			// 
+			this->Column10->HeaderText = L"Изменение";
+			this->Column10->Name = L"Column10";
+			this->Column10->ReadOnly = true;
+			// 
+			// Column11
+			// 
+			this->Column11->HeaderText = L"Удаление";
+			this->Column11->Name = L"Column11";
+			this->Column11->ReadOnly = true;
 			// 
 			// tabPage2
 			// 
@@ -328,6 +375,7 @@ namespace CppCLRWinformsProjekt {
 			this->button1->TabIndex = 8;
 			this->button1->Text = L"Добавить";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
 			// 
 			// label5
 			// 
@@ -395,7 +443,7 @@ namespace CppCLRWinformsProjekt {
 			// 
 			// tabPage3
 			// 
-			this->tabPage3->Controls->Add(this->listBox1);
+			this->tabPage3->Controls->Add(this->comboBox1);
 			this->tabPage3->Controls->Add(this->groupBox1);
 			this->tabPage3->Controls->Add(this->dateTimePicker1);
 			this->tabPage3->Controls->Add(this->button2);
@@ -410,14 +458,14 @@ namespace CppCLRWinformsProjekt {
 			this->tabPage3->Text = L"Регистрация жителей";
 			this->tabPage3->UseVisualStyleBackColor = true;
 			// 
-			// listBox1
+			// comboBox1
 			// 
-			this->listBox1->FormattingEnabled = true;
-			this->listBox1->Items->AddRange(gcnew cli::array< System::Object^  >(5) { L"1", L"5", L"7", L"3", L"5" });
-			this->listBox1->Location = System::Drawing::Point(125, 42);
-			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(226, 17);
-			this->listBox1->TabIndex = 21;
+			this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Location = System::Drawing::Point(125, 41);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(226, 21);
+			this->comboBox1->TabIndex = 3;
 			// 
 			// groupBox1
 			// 
@@ -515,15 +563,9 @@ namespace CppCLRWinformsProjekt {
 			this->textBox8->Size = System::Drawing::Size(226, 20);
 			this->textBox8->TabIndex = 9;
 			// 
-			// Column10
+			// errorProvider1
 			// 
-			this->Column10->HeaderText = L"Изменение";
-			this->Column10->Name = L"Column10";
-			// 
-			// Column11
-			// 
-			this->Column11->HeaderText = L"Удаление";
-			this->Column11->Name = L"Column11";
+			this->errorProvider1->ContainerControl = this;
 			// 
 			// Form1
 			// 
@@ -549,42 +591,47 @@ namespace CppCLRWinformsProjekt {
 			this->tabPage3->PerformLayout();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		};
 	private: System::Void открытьToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-		 System::Windows::Forms::DialogResult result = this->openFileDialog1->ShowDialog();
-		 switch (result)
-		 {
-			 case System::Windows::Forms::DialogResult::None:
-				 break;
-			 case System::Windows::Forms::DialogResult::OK:
-				 break;
-			 case System::Windows::Forms::DialogResult::Cancel:
-				 break;
-			 case System::Windows::Forms::DialogResult::Abort:
-				 break;
-			 case System::Windows::Forms::DialogResult::Retry:
-				 break;
-			 case System::Windows::Forms::DialogResult::Ignore:
-				 break;
-			 case System::Windows::Forms::DialogResult::Yes:
-				 break;
-			 case System::Windows::Forms::DialogResult::No:
-				 break;
-			 default:
-				 break;
-		 }
-	}
-	private: System::Void сохранитьToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-		System::Windows::Forms::DialogResult result = this->saveFileDialog1->ShowDialog();
-		switch (result)
+		switch (this->openFileDialog1->ShowDialog())
 		{
 		case System::Windows::Forms::DialogResult::None:
 			break;
 		case System::Windows::Forms::DialogResult::OK:
-			break;
+		{
+			std::ifstream* fin = new std::ifstream(msclr::interop::marshal_as<std::string>(this->openFileDialog1->FileName));
+			list_citizen* templ = new list_citizen;
+			try {
+				templ->read_file(fin);
+				this->dataGridView1->Rows->Clear();
+				this->dataGridView2->Rows->Clear();
+				this->comboBox1->Items->Clear();
+				delete this->list_citizens;
+				this->list_citizens = templ;
+				node_citizen* tmpc = templ->head;
+				do {
+					if (tmpc->data != NULL) {
+						this->dataGridView1->Rows->Add(msclr::interop::marshal_as<System::String^>(tmpc->data->fio_owner), tmpc->data->apartment_number.ToString(), tmpc->data->square.ToString(), tmpc->data->stage.ToString());
+						this->comboBox1->Items->Add(tmpc->data->apartment_number);
+						/*node_registered_citizen* tmprc = tmpc->data->list_registered_citizens->head;
+						do {
+
+						} while (tmprc != NULL)*/
+					}
+					tmpc = tmpc->pNext;
+				} while (tmpc != NULL);
+			}
+			catch (...) {
+				System::Windows::Forms::MessageBox::Show("Неверный формат данных!", "Ошибка", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+			}
+			fin->close();
+			delete fin;
+		}
 		case System::Windows::Forms::DialogResult::Cancel:
 			break;
 		case System::Windows::Forms::DialogResult::Abort:
@@ -601,8 +648,148 @@ namespace CppCLRWinformsProjekt {
 			break;
 		}
 	}
-private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void сохранитьToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		switch (this->saveFileDialog1->ShowDialog())
+		{
+		case System::Windows::Forms::DialogResult::None:
+			break;
+		case System::Windows::Forms::DialogResult::OK:
+		{
+			std::ofstream* fout = new std::ofstream(msclr::interop::marshal_as<std::string>(this->saveFileDialog1->FileName));
+			this->list_citizens->save_file(fout);
+			fout->close();
+			delete fout;
+		}
+		case System::Windows::Forms::DialogResult::Cancel:
+			break;
+		case System::Windows::Forms::DialogResult::Abort:
+			break;
+		case System::Windows::Forms::DialogResult::Retry:
+			break;
+		case System::Windows::Forms::DialogResult::Ignore:
+			break;
+		case System::Windows::Forms::DialogResult::Yes:
+			break;
+		case System::Windows::Forms::DialogResult::No:
+			break;
+		default:
+			break;
+		}
+	}
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 
-}
+	}
+	private: System::Void dataGridView2_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		
+	}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->errorProvider1->Clear();
+		bool valid = true;
+		System::String^ fio;
+		int number_apartament;
+		int stage;
+		int square;
+
+		// Проверка первого поля
+		fio = this->textBox1->Text;
+		if (System::String::IsNullOrEmpty(fio)) {
+			this->errorProvider1->SetError(this->textBox1, "Требуется ФИО владельца!");
+			valid = false;
+		}
+
+		// Проверка второго поля
+		try {
+			number_apartament = System::Convert::ToInt32(this->textBox2->Text->ToString());
+			if (number_apartament <= 0) {
+				this->errorProvider1->SetError(this->textBox2, "Номер квартиры должен быть больше нуля!");
+				valid = false;
+			}
+			else if (this->list_citizens->search_by_apartament_number(number_apartament) != NULL) {
+				this->errorProvider1->SetError(this->textBox2, "Квартира уже занята!");
+				valid = false;
+			}
+		}
+		catch (...) {
+			this->errorProvider1->SetError(this->textBox2, "Номер квартиры должен быть числовым!");
+			valid = false;
+		}
+
+		// Проверка третьего поля
+		try {
+			stage = System::Convert::ToInt32(this->textBox3->Text->ToString());
+			if (stage <= 0) {
+				this->errorProvider1->SetError(this->textBox3, "Этаж должен быть больше нуля!");
+				valid = false;
+			}
+		}
+		catch (...) {
+			this->errorProvider1->SetError(this->textBox3, "Этаж должен быть числовым!");
+			valid = false;
+		}
+
+		// Проверка четвертого поля
+		try {
+			square = System::Convert::ToInt32(this->textBox4->Text->ToString());
+			if (square <= 0) {
+				this->errorProvider1->SetError(this->textBox4, "Площадь квартиры должен быть больше нуля!");
+				valid = false;
+			}
+		}
+		catch (...) {
+			this->errorProvider1->SetError(this->textBox4, "Площадь квартиры должен быть числовым!");
+			valid = false;
+		}
+		if (valid) {
+			citizen* temp = new citizen;
+			temp->apartment_number = number_apartament;
+			temp->fio_owner = msclr::interop::marshal_as<std::string>(fio);
+			temp->stage = stage;
+			temp->square = square;
+			comboBox1->Items->Add(number_apartament);
+			this->list_citizens->push_sorted(temp);
+			this->dataGridView1->Rows->Add(fio, number_apartament, square, stage);
+			System::Windows::Forms::MessageBox::Show("Вы добавили владельца квартиры!", "Успех", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
+			this->textBox1->Clear();
+			this->textBox2->Clear();
+			this->textBox3->Clear();
+			this->textBox4->Clear();
+		}
+	}
+	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		if (e->RowIndex > -1) {
+			switch (e->ColumnIndex) {
+			case 4:
+			{
+				System::Windows::Forms::DataGridViewRow^ row = dataGridView1->Rows[e->RowIndex];
+				int number_apartament = System::Convert::ToInt32(row->Cells["Column2"]->Value);
+				citizen* temp = this->list_citizens->search_by_apartament_number(number_apartament);
+				System::Windows::Forms::Form^ form = gcnew CppCLR_WinformsProjekt1::MyForm(temp, this->list_citizens);
+				form->ShowDialog();
+				row->Cells["Column1"]->Value = msclr::interop::marshal_as<System::String^>(temp->fio_owner);
+				row->Cells["Column2"]->Value = temp->apartment_number;
+				row->Cells["Column3"]->Value = temp->square;
+				row->Cells["Column4"]->Value = temp->stage;
+			}
+			case 5:
+			{
+				switch (System::Windows::Forms::MessageBox::Show("Вы уверены что хотите удалить данную запись? Запись будет утеряна навсегда", "Подтверждение пользователя", System::Windows::Forms::MessageBoxButtons::OKCancel, System::Windows::Forms::MessageBoxIcon::Question))
+				{
+				case System::Windows::Forms::DialogResult::OK:
+				{
+					System::Windows::Forms::DataGridViewRow^ row = dataGridView1->Rows[e->RowIndex];
+					int number_apartament = System::Convert::ToInt32(row->Cells["Column2"]->Value);
+					this->list_citizens->delete_by_apartament_number(number_apartament);
+					dataGridView1->Rows->Remove(row);
+					System::Windows::Forms::MessageBox::Show("Вы успешно удалили данную запись", "Успех", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
+				}
+				default:
+					break;
+				}
+				
+				
+			}
+			}
+		}
+	}
 };
 };

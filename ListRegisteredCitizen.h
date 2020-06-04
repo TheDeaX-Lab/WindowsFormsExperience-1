@@ -13,6 +13,9 @@ struct list_registered_citizen {
 	void print();
 
 	void input();
+
+	void save_file(std::ofstream* fout);
+	void read_file(std::ifstream* fin);
 };
 
 list_registered_citizen::list_registered_citizen() {
@@ -36,4 +39,19 @@ void list_registered_citizen::print() {
 
 void list_registered_citizen::input() {
 	this->head = this->head->input();
+}
+
+void list_registered_citizen::save_file(std::ofstream* fout) {
+	*fout << this->size << '\n';
+	this->head->save_file(fout);
+}
+
+void list_registered_citizen::read_file(std::ifstream* fin) {
+	int size;
+	*fin >> size;
+	for (int i = 0; i < size; i++) {
+		registered_citizen* tmp = new registered_citizen;
+		tmp->read_file(fin);
+		this->push_head(tmp);
+	}
 }

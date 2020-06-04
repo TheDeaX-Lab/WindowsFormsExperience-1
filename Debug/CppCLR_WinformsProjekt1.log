@@ -1,3 +1,4 @@
 ﻿  CppCLR_WinformsProjekt.cpp
+C:\Users\Aleksandr\source\repos\CppCLR_WinformsProjekt1\RegisteredCitizen.h(32,22): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   AssemblyInfo.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
   CppCLR_WinformsProjekt1.vcxproj -> C:\Users\Aleksandr\source\repos\CppCLR_WinformsProjekt1\Debug\CppCLR_WinformsProjekt1.exe

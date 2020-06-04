@@ -14,6 +14,7 @@ struct node_registered_citizen {
 	node_registered_citizen* push_head(registered_citizen* data);
 	node_registered_citizen* input();
 	void clear();
+	void save_file(std::ofstream* fout);
 };
 
 node_registered_citizen::node_registered_citizen(registered_citizen* data, node_registered_citizen* pNext) {
@@ -73,4 +74,19 @@ void node_registered_citizen::clear()
 		this->pNext->clear();
 	}
 	delete this;
+}
+
+void node_registered_citizen::save_file(std::ofstream* fout) {
+	node_registered_citizen* temp = this;
+	do {
+		registered_citizen* tmp = temp->data;
+		if (tmp != NULL) {
+			*fout << tmp->fio << '\n';
+			*fout << tmp->birth.day << '\n';
+			*fout << tmp->birth.month << '\n';
+			*fout << tmp->birth.year << '\n';
+			*fout << tmp->target << '\n';
+		}
+		temp = temp->pNext;
+	} while (temp != NULL);
 }

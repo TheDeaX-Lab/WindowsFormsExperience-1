@@ -7,10 +7,7 @@ struct node_citizen {
 
 	node_citizen(citizen* data);
 
-	node_citizen() {
-		this->data = NULL;
-		this->pNext = NULL;
-	};
+	node_citizen();
 	citizen* data;
 	node_citizen* pNext;
 
@@ -26,6 +23,9 @@ struct node_citizen {
 
 	void print();
 	void clear();
+	citizen* search_by_apartament_number(int apartament_number);
+	void save_file(std::ofstream* fout);
+	node_citizen* delete_by_apartament_number(int apartament_number);
 };
 
 node_citizen::~node_citizen() {
@@ -134,4 +134,56 @@ void node_citizen::clear()
 		this->pNext->clear();
 	}
 	delete this;
+}
+
+citizen* node_citizen::search_by_apartament_number(int apartament_number) {
+	node_citizen* temp = this;
+	do {
+		if (temp->data != NULL) {
+			if (temp->data->apartment_number == apartament_number) {
+				return temp->data;
+			}
+		}
+		temp = temp->pNext;
+	} while (temp != NULL);
+	return NULL;
+}
+
+void node_citizen::save_file(std::ofstream* fout) {
+	node_citizen* temp = this;
+	do {
+		citizen* tmp = temp->data;
+		if (tmp != NULL) {
+			*fout << tmp->fio_owner << '\n';
+			*fout << tmp->apartment_number << '\n';
+			*fout << tmp->square << '\n';
+			*fout << tmp->stage << '\n';
+			tmp->list_registered_citizens->save_file(fout);
+		}
+		temp = temp->pNext;
+	} while (temp != NULL);
+}
+
+node_citizen* node_citizen::delete_by_apartament_number(int apartament_number) {
+	if (this->data->apartment_number == apartament_number) {
+		node_citizen* tmp = this->pNext;
+		delete this;
+		return tmp;
+	}
+	else
+	{
+		node_citizen* temp = this;
+		do {
+			if (temp != NULL) {
+				if (temp->pNext->data->apartment_number == apartament_number) {
+					node_citizen* tmp = temp->pNext;
+					temp->pNext = tmp->pNext;
+					delete tmp;
+					break;
+				}
+			}
+			temp = temp->pNext;
+		} while (temp != NULL);
+		return this;
+	}
 }

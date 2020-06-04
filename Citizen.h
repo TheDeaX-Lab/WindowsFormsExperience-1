@@ -14,6 +14,8 @@ struct citizen {
 	void print();
 
 	void input_citizen();
+
+	void read_file(std::ifstream* fin);
 };
 
 citizen::citizen() {
@@ -70,4 +72,13 @@ void citizen::input_citizen() {
 		}
 	}
 	this->list_registered_citizens->input();
+}
+
+void citizen::read_file(std::ifstream* fin) {
+	fin->ignore();
+	std::getline(*fin, this->fio_owner, '\n');
+	*fin >> this->apartment_number;
+	*fin >> this->square;
+	*fin >> this->stage;
+	this->list_registered_citizens->read_file(fin);
 }

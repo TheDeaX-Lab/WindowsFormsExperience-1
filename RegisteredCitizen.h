@@ -1,6 +1,8 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #include <string>
 #include <ctime>
+#include <fstream>
 #include "Birth.h"
 struct registered_citizen {
 	std::string fio;
@@ -10,6 +12,7 @@ struct registered_citizen {
 	void print();
 
 	void input();
+	void read_file(std::ifstream* fin);
 };
 
 void registered_citizen::print() {
@@ -35,4 +38,13 @@ void registered_citizen::input() {
 		std::cout << "Введите род занятий (учеба, работа, пенсия): ";
 		std::cin >> this->target;
 	}
+}
+
+void registered_citizen::read_file(std::ifstream* fin) {
+	fin->ignore();
+	std::getline(*fin, this->fio, '\n');
+	*fin >> this->birth.day;
+	*fin >> this->birth.month;
+	*fin >> this->birth.year;
+	*fin >> this->target;
 }
