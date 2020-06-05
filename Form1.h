@@ -1,8 +1,7 @@
 #pragma once
+#include "ListCitizen.h"
 #include <msclr\marshal_cppstd.h>
-#include <fstream>
 #include "MyForm.h"
-
 namespace CppCLRWinformsProjekt {
 
 	using namespace System;
@@ -574,7 +573,7 @@ namespace CppCLRWinformsProjekt {
 			this->ClientSize = System::Drawing::Size(662, 449);
 			this->Controls->Add(this->tabControl1);
 			this->Controls->Add(this->menuStrip1);
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
 			this->Text = L"Form1";
@@ -680,7 +679,7 @@ namespace CppCLRWinformsProjekt {
 
 	}
 	private: System::Void dataGridView2_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-		
+
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->errorProvider1->Clear();
@@ -769,6 +768,7 @@ namespace CppCLRWinformsProjekt {
 				row->Cells["Column2"]->Value = temp->apartment_number;
 				row->Cells["Column3"]->Value = temp->square;
 				row->Cells["Column4"]->Value = temp->stage;
+				break;
 			}
 			case 5:
 			{
@@ -785,11 +785,9 @@ namespace CppCLRWinformsProjekt {
 				default:
 					break;
 				}
-				
-				
 			}
 			}
 		}
 	}
-};
+	};
 };

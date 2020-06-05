@@ -1,9 +1,4 @@
 #pragma once
-#include <msclr\marshal_cppstd.h>
-#include "Citizen.h"
-#include "ListCitizen.h"
-#include "ListRegisteredCitizen.h"
-#include "RegisteredCitizen.h"
 namespace CppCLR_WinformsProjekt1 {
 
 	using namespace System;
