@@ -1,8 +1,4 @@
 #pragma once
-#include <windows.h>
-#include <thread>
-
-
 
 namespace CppCLR_WinformsProjekt1 {
 

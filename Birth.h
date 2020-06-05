@@ -8,6 +8,8 @@ struct birth {
 
 	void input();
 
+	int get_age();
+
 	std::string to_string();
 };
 
@@ -38,4 +40,14 @@ void birth::input() {
 
 std::string birth::to_string() {
 	return std::to_string(this->day) + "." + std::to_string(this->month) + "." + std::to_string(this->year);
+}
+
+int birth::get_age() {
+	std::time_t t = std::time(0);
+	std::tm* now = std::localtime(&t);
+	int year = now->tm_year + 1900 - this->year - 1;
+	if (month == (now->tm_mon + 1) && day >= now->tm_mday || month > (now->tm_mon + 1)) {
+		year += 1;
+	}
+	return year;
 }

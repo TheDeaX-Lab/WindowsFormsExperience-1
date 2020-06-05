@@ -7,12 +7,17 @@ struct list_citizen {
 
 	node_citizen* head;
 	int size;
+	int less18;
+	int more18;
 
 	void input();
 
 	void print();
 	void push_sorted(citizen* data);
+	void push_registered_citizen(int apartament_number, registered_citizen* data);
 	citizen* search_by_apartament_number(int apartament_number);
+
+	registered_citizen* search_registered_citizen_by_all_data(int apartament_number, std::string fio, int year, int month, int day, std::string target);
 
 	void save_file(std::ofstream* fout);
 	void read_file(std::ifstream* fin);
@@ -22,6 +27,8 @@ struct list_citizen {
 list_citizen::list_citizen() {
 	this->head = new node_citizen;
 	this->size = 0;
+	this->less18 = 0;
+	this->more18 = 0;
 }
 
 list_citizen::~list_citizen()
@@ -42,8 +49,24 @@ void list_citizen::push_sorted(citizen* data) {
 	this->size++;
 }
 
+void list_citizen::push_registered_citizen(int apartament_number, registered_citizen* data) {
+	citizen* owner = this->search_by_apartament_number(apartament_number);
+	owner->list_registered_citizens->push_head(data);
+	if (data->age >= 18) {
+		this->more18++;
+	}
+	else {
+		this->less18++;
+	}
+}
+
 citizen* list_citizen::search_by_apartament_number(int apartament_number) {
 	return this->head->search_by_apartament_number(apartament_number);
+}
+
+registered_citizen* list_citizen::search_registered_citizen_by_all_data(int apartament_number, std::string fio, int year, int month, int day, std::string target) {
+	citizen* owner = this->search_by_apartament_number(apartament_number);
+	return owner->list_registered_citizens->search_registered_citizen_by_all_data(fio, year, month, day, target);
 }
 
 void list_citizen::save_file(std::ofstream* fout) {
@@ -57,6 +80,8 @@ void list_citizen::read_file(std::ifstream* fin) {
 	for (int i = 0; i < size; i++) {
 		citizen* tmp = new citizen;
 		tmp->read_file(fin);
+		this->less18 += tmp->list_registered_citizens->less18;
+		this->more18 += tmp->list_registered_citizens->more18;
 		this->push_sorted(tmp);
 	}
 }

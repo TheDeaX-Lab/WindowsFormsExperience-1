@@ -38,6 +38,7 @@ namespace CppCLRWinformsProjekt {
 			}
 		}
 	private: list_citizen* list_citizens;
+	private: bool datetime_checked = true;
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	protected:
 	private: System::Windows::Forms::ToolStripMenuItem^ файлToolStripMenuItem;
@@ -94,6 +95,10 @@ namespace CppCLRWinformsProjekt {
 	private: System::Windows::Forms::ComboBox^ comboBox1;
 	private: System::Windows::Forms::BindingSource^ bindingSource1;
 	private: System::Windows::Forms::ErrorProvider^ errorProvider1;
+	private: System::Windows::Forms::ErrorProvider^ errorProvider2;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::ComboBox^ comboBox2;
+	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart1;
 
 	protected:
 	private: System::ComponentModel::IContainer^ components;
@@ -114,6 +119,13 @@ namespace CppCLRWinformsProjekt {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^ legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::DataPoint^ dataPoint1 = (gcnew System::Windows::Forms::DataVisualization::Charting::DataPoint(18,
+				L"50,0"));
+			System::Windows::Forms::DataVisualization::Charting::DataPoint^ dataPoint2 = (gcnew System::Windows::Forms::DataVisualization::Charting::DataPoint(100,
+				L"25,0"));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->файлToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->открытьToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -122,6 +134,7 @@ namespace CppCLRWinformsProjekt {
 			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -130,6 +143,8 @@ namespace CppCLRWinformsProjekt {
 			this->Column8 = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
 			this->Column9 = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
 			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
 			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -160,9 +175,11 @@ namespace CppCLRWinformsProjekt {
 			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
 			this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
 			this->errorProvider1 = (gcnew System::Windows::Forms::ErrorProvider(this->components));
+			this->errorProvider2 = (gcnew System::Windows::Forms::ErrorProvider(this->components));
 			this->menuStrip1->SuspendLayout();
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->tabPage4->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
@@ -171,6 +188,7 @@ namespace CppCLRWinformsProjekt {
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
@@ -219,19 +237,42 @@ namespace CppCLRWinformsProjekt {
 			this->tabControl1->Location = System::Drawing::Point(12, 27);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(650, 410);
+			this->tabControl1->Size = System::Drawing::Size(650, 582);
 			this->tabControl1->TabIndex = 2;
 			// 
 			// tabPage1
 			// 
+			this->tabPage1->Controls->Add(this->chart1);
 			this->tabPage1->Controls->Add(this->dataGridView1);
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(642, 384);
+			this->tabPage1->Size = System::Drawing::Size(642, 556);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Просмотр";
 			this->tabPage1->UseVisualStyleBackColor = true;
+			// 
+			// chart1
+			// 
+			chartArea1->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea1);
+			legend1->Name = L"Legend1";
+			this->chart1->Legends->Add(legend1);
+			this->chart1->Location = System::Drawing::Point(4, 391);
+			this->chart1->Name = L"chart1";
+			series1->ChartArea = L"ChartArea1";
+			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Doughnut;
+			series1->Legend = L"Legend1";
+			series1->Name = L"Series1";
+			dataPoint1->LegendText = L"< 18";
+			dataPoint2->LegendText = L">= 18";
+			series1->Points->Add(dataPoint1);
+			series1->Points->Add(dataPoint2);
+			series1->YValuesPerPoint = 2;
+			this->chart1->Series->Add(series1);
+			this->chart1->Size = System::Drawing::Size(635, 159);
+			this->chart1->TabIndex = 1;
+			this->chart1->Text = L"chart1";
 			// 
 			// dataGridView1
 			// 
@@ -291,13 +332,35 @@ namespace CppCLRWinformsProjekt {
 			// 
 			// tabPage4
 			// 
+			this->tabPage4->Controls->Add(this->label1);
+			this->tabPage4->Controls->Add(this->comboBox2);
 			this->tabPage4->Controls->Add(this->dataGridView2);
 			this->tabPage4->Location = System::Drawing::Point(4, 22);
 			this->tabPage4->Name = L"tabPage4";
-			this->tabPage4->Size = System::Drawing::Size(642, 384);
+			this->tabPage4->Size = System::Drawing::Size(642, 556);
 			this->tabPage4->TabIndex = 3;
 			this->tabPage4->Text = L"Просмотр зарегистрированных";
 			this->tabPage4->UseVisualStyleBackColor = true;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(3, 6);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(96, 13);
+			this->label1->TabIndex = 2;
+			this->label1->Text = L"Номер квартиры:";
+			// 
+			// comboBox2
+			// 
+			this->comboBox2->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBox2->FormattingEnabled = true;
+			this->comboBox2->Location = System::Drawing::Point(105, 3);
+			this->comboBox2->Name = L"comboBox2";
+			this->comboBox2->Size = System::Drawing::Size(534, 21);
+			this->comboBox2->Sorted = true;
+			this->comboBox2->TabIndex = 1;
+			this->comboBox2->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::comboBox2_SelectedIndexChanged);
 			// 
 			// dataGridView2
 			// 
@@ -309,11 +372,11 @@ namespace CppCLRWinformsProjekt {
 				this->Column5,
 					this->Column6, this->Column7, this->Column10, this->Column11
 			});
-			this->dataGridView2->Location = System::Drawing::Point(0, 0);
+			this->dataGridView2->Location = System::Drawing::Point(0, 30);
 			this->dataGridView2->Name = L"dataGridView2";
 			this->dataGridView2->ReadOnly = true;
 			this->dataGridView2->RowTemplate->ReadOnly = true;
-			this->dataGridView2->Size = System::Drawing::Size(639, 384);
+			this->dataGridView2->Size = System::Drawing::Size(639, 354);
 			this->dataGridView2->TabIndex = 0;
 			this->dataGridView2->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Form1::dataGridView2_CellContentClick);
 			// 
@@ -361,7 +424,7 @@ namespace CppCLRWinformsProjekt {
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(642, 384);
+			this->tabPage2->Size = System::Drawing::Size(642, 556);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"Создание владельца";
 			this->tabPage2->UseVisualStyleBackColor = true;
@@ -452,7 +515,7 @@ namespace CppCLRWinformsProjekt {
 			this->tabPage3->Controls->Add(this->textBox8);
 			this->tabPage3->Location = System::Drawing::Point(4, 22);
 			this->tabPage3->Name = L"tabPage3";
-			this->tabPage3->Size = System::Drawing::Size(642, 384);
+			this->tabPage3->Size = System::Drawing::Size(642, 556);
 			this->tabPage3->TabIndex = 2;
 			this->tabPage3->Text = L"Регистрация жителей";
 			this->tabPage3->UseVisualStyleBackColor = true;
@@ -464,6 +527,7 @@ namespace CppCLRWinformsProjekt {
 			this->comboBox1->Location = System::Drawing::Point(125, 41);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(226, 21);
+			this->comboBox1->Sorted = true;
 			this->comboBox1->TabIndex = 3;
 			// 
 			// groupBox1
@@ -477,6 +541,7 @@ namespace CppCLRWinformsProjekt {
 			this->groupBox1->TabIndex = 20;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Род занятий";
+			this->groupBox1->Visible = false;
 			// 
 			// radioButton3
 			// 
@@ -517,6 +582,7 @@ namespace CppCLRWinformsProjekt {
 			this->dateTimePicker1->Name = L"dateTimePicker1";
 			this->dateTimePicker1->Size = System::Drawing::Size(226, 20);
 			this->dateTimePicker1->TabIndex = 19;
+			this->dateTimePicker1->ValueChanged += gcnew System::EventHandler(this, &Form1::dateTimePicker1_ValueChanged);
 			// 
 			// button2
 			// 
@@ -566,11 +632,15 @@ namespace CppCLRWinformsProjekt {
 			// 
 			this->errorProvider1->ContainerControl = this;
 			// 
+			// errorProvider2
+			// 
+			this->errorProvider2->ContainerControl = this;
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(662, 449);
+			this->ClientSize = System::Drawing::Size(662, 621);
 			this->Controls->Add(this->tabControl1);
 			this->Controls->Add(this->menuStrip1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -581,8 +651,10 @@ namespace CppCLRWinformsProjekt {
 			this->menuStrip1->PerformLayout();
 			this->tabControl1->ResumeLayout(false);
 			this->tabPage1->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->tabPage4->ResumeLayout(false);
+			this->tabPage4->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
 			this->tabPage2->ResumeLayout(false);
 			this->tabPage2->PerformLayout();
@@ -592,6 +664,7 @@ namespace CppCLRWinformsProjekt {
 			this->groupBox1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -610,6 +683,7 @@ namespace CppCLRWinformsProjekt {
 				this->dataGridView1->Rows->Clear();
 				this->dataGridView2->Rows->Clear();
 				this->comboBox1->Items->Clear();
+				this->comboBox2->Items->Clear();
 				delete this->list_citizens;
 				this->list_citizens = templ;
 				node_citizen* tmpc = templ->head;
@@ -617,9 +691,12 @@ namespace CppCLRWinformsProjekt {
 					if (tmpc->data != NULL) {
 						this->dataGridView1->Rows->Add(msclr::interop::marshal_as<System::String^>(tmpc->data->fio_owner), tmpc->data->apartment_number.ToString(), tmpc->data->square.ToString(), tmpc->data->stage.ToString());
 						this->comboBox1->Items->Add(tmpc->data->apartment_number);
+						this->comboBox2->Items->Add(tmpc->data->apartment_number);
 						/*node_registered_citizen* tmprc = tmpc->data->list_registered_citizens->head;
 						do {
+							if (tmprc->data != NULL) {
 
+							}
 						} while (tmprc != NULL)*/
 					}
 					tmpc = tmpc->pNext;
@@ -676,7 +753,61 @@ namespace CppCLRWinformsProjekt {
 		}
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		this->errorProvider2->Clear();
+		bool valid = true;
+		System::String^ fio;
+		std::string target = "";
+		int number_apartament;
+		if (comboBox1->SelectedIndex == -1) {
+			this->errorProvider2->SetError(comboBox1, "Вы должны номер квартиры для регистрации!");
+			valid = false;
+		}
+		else {
+			number_apartament = System::Convert::ToInt32(comboBox1->Items[comboBox1->SelectedIndex]);
+		}
+		if (!this->datetime_checked) {
+			this->errorProvider2->SetError(this->dateTimePicker1, "Вы проигнорировали неверную дату рождения!");
+			valid = false;
+		}
+		fio = this->textBox8->Text;
+		if (System::String::IsNullOrEmpty(fio)) {
+			this->errorProvider2->SetError(this->textBox8, "Вы должны ввести ФИО!");
+			valid = false;
+		}
+		if (this->groupBox1->Visible) {
+			if (this->radioButton1->Checked) {
+				target = "Учеба";
+			}
+			else if (this->radioButton2->Checked) {
+				target = "Работа";
+			}
+			else if (this->radioButton3->Checked) {
+				target = "Пенсия";
+			}
+			else {
+				this->errorProvider2->SetError(this->groupBox1, "Вы должны выбрать род занятий для данного человека!");
+				valid = false;
+			}
+		}
+		if (valid) {
+			registered_citizen* tmp = new registered_citizen;
+			System::DateTime^ datetime = this->dateTimePicker1->Value;
+			tmp->birth.day = datetime->Day;
+			tmp->birth.month = datetime->Month;
+			tmp->birth.year = datetime->Year;
+			tmp->fio = msclr::interop::marshal_as<std::string>(fio);
+			tmp->target = target;
+			if (!this->list_citizens->search_registered_citizen_by_all_data(number_apartament, tmp->fio, tmp->birth.year, tmp->birth.month, tmp->birth.day, tmp->target)) {
+				tmp->age = tmp->birth.get_age();
+				this->list_citizens->push_registered_citizen(number_apartament, tmp);
+			}
+			else {
+				this->errorProvider2->SetError(textBox8, "Такая запись уже существует!");
+				this->errorProvider2->SetError(dateTimePicker1, "Такая запись уже существует!");
+				this->errorProvider2->SetError(comboBox1, "Такая запись уже существует!");
+				this->errorProvider2->SetError(groupBox1, "Такая запись уже существует!");
+			}
+		}
 	}
 	private: System::Void dataGridView2_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 
@@ -745,6 +876,7 @@ namespace CppCLRWinformsProjekt {
 			temp->stage = stage;
 			temp->square = square;
 			comboBox1->Items->Add(number_apartament);
+			comboBox2->Items->Add(number_apartament);
 			this->list_citizens->push_sorted(temp);
 			this->dataGridView1->Rows->Add(fio, number_apartament, square, stage);
 			System::Windows::Forms::MessageBox::Show("Вы добавили владельца квартиры!", "Успех", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
@@ -763,11 +895,15 @@ namespace CppCLRWinformsProjekt {
 				int number_apartament = System::Convert::ToInt32(row->Cells["Column2"]->Value);
 				citizen* temp = this->list_citizens->search_by_apartament_number(number_apartament);
 				System::Windows::Forms::Form^ form = gcnew CppCLR_WinformsProjekt1::MyForm(temp, this->list_citizens);
+				int index1 = this->comboBox1->Items->IndexOf(temp->apartment_number);
+				int index2 = this->comboBox2->Items->IndexOf(temp->apartment_number);
 				form->ShowDialog();
 				row->Cells["Column1"]->Value = msclr::interop::marshal_as<System::String^>(temp->fio_owner);
 				row->Cells["Column2"]->Value = temp->apartment_number;
 				row->Cells["Column3"]->Value = temp->square;
 				row->Cells["Column4"]->Value = temp->stage;
+				comboBox1->Items[index1] = temp->apartment_number;
+				comboBox2->Items[index2] = temp->apartment_number;
 				break;
 			}
 			case 5:
@@ -780,6 +916,11 @@ namespace CppCLRWinformsProjekt {
 					int number_apartament = System::Convert::ToInt32(row->Cells["Column2"]->Value);
 					this->list_citizens->delete_by_apartament_number(number_apartament);
 					dataGridView1->Rows->Remove(row);
+					if (comboBox2->SelectedIndex == comboBox2->Items->IndexOf(number_apartament)) {
+						dataGridView2->Rows->Clear();
+					}
+					comboBox1->Items->Remove(number_apartament);
+					comboBox2->Items->Remove(number_apartament);
 					System::Windows::Forms::MessageBox::Show("Вы успешно удалили данную запись", "Успех", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
 				}
 				default:
@@ -789,5 +930,51 @@ namespace CppCLRWinformsProjekt {
 			}
 		}
 	}
-	};
+	private: System::Void dateTimePicker1_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
+		errorProvider2->Clear();
+		System::DateTime^ datetime = this->dateTimePicker1->Value;
+		System::DateTime^ now = System::DateTime::Now;
+		bool c = true;
+		if (datetime->Year > now->Year) {
+			c = false;
+		} else if (datetime->Year == now->Year) {
+			if (datetime->Month > now->Month) {
+				c = false;
+			}
+			else if (datetime->Month == now->Month) {
+				if (datetime->Day > now->Day) {
+					c = false;
+				}
+			}
+		}
+		if (!c) {
+			errorProvider2->SetError(this->dateTimePicker1, "Гражданин ещё не родился!");
+			this->datetime_checked = false;
+		}
+		else {
+			int ages = now->Year - datetime->Year - (now->Month < datetime->Month ? 1 : (now->Month == datetime->Month && now->Day < datetime->Day ? 1 : 0));
+			if (ages > 18) {
+				groupBox1->Visible = true;
+			}
+			else {
+				groupBox1->Visible = false;
+			}
+			this->datetime_checked = true;
+		}
+	}
+private: System::Void comboBox2_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	int index = comboBox2->SelectedIndex;
+	if (index != -1) {
+		dataGridView2->Rows->Clear();
+		citizen* owner = this->list_citizens->search_by_apartament_number(System::Convert::ToInt32(comboBox2->Items[index]));
+		node_registered_citizen* temp = owner->list_registered_citizens->head;
+		do {
+			if (temp->data != NULL) {
+				dataGridView2->Rows->Add(msclr::interop::marshal_as<System::String^>(temp->data->fio), msclr::interop::marshal_as<System::String^>(temp->data->birth.to_string()), msclr::interop::marshal_as<System::String^>(temp->data->target));
+			}
+			temp = temp->pNext;
+		} while (temp != NULL);
+	}
+}
+};
 };

@@ -15,6 +15,7 @@ struct node_registered_citizen {
 	node_registered_citizen* input();
 	void clear();
 	void save_file(std::ofstream* fout);
+	registered_citizen* search_registered_citizen_by_all_data(std::string fio, int year, int month, int day, std::string target);
 };
 
 node_registered_citizen::node_registered_citizen(registered_citizen* data, node_registered_citizen* pNext) {
@@ -85,7 +86,21 @@ void node_registered_citizen::save_file(std::ofstream* fout) {
 			*fout << tmp->birth.day << '\n';
 			*fout << tmp->birth.month << '\n';
 			*fout << tmp->birth.year << '\n';
-			*fout << tmp->target << '\n';
+			*fout << tmp->target << "n\n";
+		}
+		temp = temp->pNext;
+	} while (temp != NULL);
+}
+
+
+registered_citizen* node_registered_citizen::search_registered_citizen_by_all_data(std::string fio, int year, int month, int day, std::string target) {
+	node_registered_citizen* temp = this;
+	do {
+		registered_citizen* tmp = temp->data;
+		if (tmp != NULL) {
+			if (tmp->target == target && tmp->fio == fio && tmp->birth.day == day && tmp->birth.month == month && tmp->birth.year == year) {
+				return tmp;
+			}
 		}
 		temp = temp->pNext;
 	} while (temp != NULL);
