@@ -167,6 +167,7 @@ void node_citizen::save_file(std::ofstream* fout) {
 node_citizen* node_citizen::delete_by_apartament_number(int apartament_number) {
 	if (this->data->apartment_number == apartament_number) {
 		node_citizen* tmp = this->pNext;
+		this->pNext = NULL;
 		delete this;
 		return tmp;
 	}
@@ -178,6 +179,7 @@ node_citizen* node_citizen::delete_by_apartament_number(int apartament_number) {
 				if (temp->pNext->data->apartment_number == apartament_number) {
 					node_citizen* tmp = temp->pNext;
 					temp->pNext = tmp->pNext;
+					tmp->pNext = NULL;
 					delete tmp;
 					break;
 				}

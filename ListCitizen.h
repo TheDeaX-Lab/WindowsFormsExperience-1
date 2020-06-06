@@ -15,6 +15,7 @@ struct list_citizen {
 	void print();
 	void push_sorted(citizen* data);
 	void push_registered_citizen(int apartament_number, registered_citizen* data);
+	void remove_registered_citizen_from_apartament(int apartament, registered_citizen* data);
 	citizen* search_by_apartament_number(int apartament_number);
 
 	registered_citizen* search_registered_citizen_by_all_data(int apartament_number, std::string fio, int year, int month, int day, std::string target);
@@ -22,6 +23,7 @@ struct list_citizen {
 	void save_file(std::ofstream* fout);
 	void read_file(std::ifstream* fin);
 	void delete_by_apartament_number(int apartament_number);
+	void replace_apartament_number_in_registered_citizen(int from_apartament_number, int to_apartament_number, registered_citizen* tmp);
 };
 
 list_citizen::list_citizen() {
@@ -60,6 +62,17 @@ void list_citizen::push_registered_citizen(int apartament_number, registered_cit
 	}
 }
 
+void list_citizen::remove_registered_citizen_from_apartament(int apartament_number, registered_citizen* data) {
+	citizen* owner = this->search_by_apartament_number(apartament_number);
+	owner->list_registered_citizens->remove_registered_citizen(data);
+	if (data->age >= 18) {
+		this->more18--;
+	}
+	else {
+		this->less18--;
+	}
+}
+
 citizen* list_citizen::search_by_apartament_number(int apartament_number) {
 	return this->head->search_by_apartament_number(apartament_number);
 }
@@ -87,6 +100,9 @@ void list_citizen::read_file(std::ifstream* fin) {
 }
 
 void list_citizen::delete_by_apartament_number(int apartament_number) {
+	citizen* owner = this->search_by_apartament_number(apartament_number);
+	this->less18 -= owner->list_registered_citizens->less18;
+	this->more18 -= owner->list_registered_citizens->more18;
 	this->head = this->head->delete_by_apartament_number(apartament_number);
 	this->size--;
 }

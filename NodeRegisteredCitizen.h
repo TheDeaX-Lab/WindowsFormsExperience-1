@@ -16,6 +16,7 @@ struct node_registered_citizen {
 	void clear();
 	void save_file(std::ofstream* fout);
 	registered_citizen* search_registered_citizen_by_all_data(std::string fio, int year, int month, int day, std::string target);
+	node_registered_citizen* remove_registered_citizen(registered_citizen* data);
 };
 
 node_registered_citizen::node_registered_citizen(registered_citizen* data, node_registered_citizen* pNext) {
@@ -104,4 +105,34 @@ registered_citizen* node_registered_citizen::search_registered_citizen_by_all_da
 		}
 		temp = temp->pNext;
 	} while (temp != NULL);
+}
+
+node_registered_citizen* node_registered_citizen::remove_registered_citizen(registered_citizen* data) {
+	if (this->data == data) {
+		node_registered_citizen* p = this->pNext;
+		this->data = NULL;
+		this->pNext = NULL;
+		delete this;
+		if (p == NULL) {
+			p = new node_registered_citizen;
+		}
+		return p;
+	}
+	else {
+		node_registered_citizen* temp = this;
+		do {
+			if (temp->pNext != NULL) {
+				if (temp->pNext->data == data) {
+					node_registered_citizen* p = temp->pNext;
+					p->data = NULL;
+					temp->pNext = p->pNext;
+					p->pNext = NULL;
+					delete p;
+					break;
+				}
+			}
+			temp = temp->pNext;
+		} while (temp != NULL);
+		return this;
+	}
 }

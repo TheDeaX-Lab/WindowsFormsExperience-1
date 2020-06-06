@@ -5,3 +5,4 @@ C:\Users\Aleksandr\source\repos\CppCLR_WinformsProjekt1\Debug\CppCLR_WinformsPro
 C:\Users\Aleksandr\source\repos\CppCLR_WinformsProjekt1\Debug\CppCLR_WinformsProjekt1.pdb
 C:\Users\Aleksandr\source\repos\CppCLR_WinformsProjekt1\Debug\CppCLR_WinformsProjekt1.vcxprojAssemblyReference.cache
 C:\Users\Aleksandr\source\repos\CppCLR_WinformsProjekt1\Debug\CppCLR_WinformsProjekt1.MyForm1.resources
+C:\Users\Aleksandr\source\repos\CppCLR_WinformsProjekt1\Debug\CppCLR_WinformsProjekt1.MyForm2.resources

@@ -19,6 +19,7 @@ struct list_registered_citizen {
 	void save_file(std::ofstream* fout);
 	void read_file(std::ifstream* fin);
 	registered_citizen* search_registered_citizen_by_all_data(std::string fio, int year, int month, int day, std::string target);
+	void remove_registered_citizen(registered_citizen* data);
 };
 
 list_registered_citizen::list_registered_citizen() {
@@ -69,4 +70,14 @@ void list_registered_citizen::read_file(std::ifstream* fin) {
 
 registered_citizen* list_registered_citizen::search_registered_citizen_by_all_data(std::string fio, int year, int month, int day, std::string target) {
 	return this->head->search_registered_citizen_by_all_data(fio, year, month, day, target);
+}
+
+void list_registered_citizen::remove_registered_citizen(registered_citizen* data) {
+	this->head = this->head->remove_registered_citizen(data);
+	if (data->age >= 18) {
+		this->more18--;
+	}
+	else {
+		this->less18--;
+	}
 }

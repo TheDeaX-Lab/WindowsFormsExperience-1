@@ -2,6 +2,7 @@
 #include "ListCitizen.h"
 #include <msclr\marshal_cppstd.h>
 #include "MyForm.h"
+#include "MyForm2.h"
 namespace CppCLRWinformsProjekt {
 
 	using namespace System;
@@ -99,6 +100,7 @@ namespace CppCLRWinformsProjekt {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::ComboBox^ comboBox2;
 	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart1;
+	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart2;
 
 	protected:
 	private: System::ComponentModel::IContainer^ components;
@@ -122,10 +124,19 @@ namespace CppCLRWinformsProjekt {
 			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
 			System::Windows::Forms::DataVisualization::Charting::Legend^ legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
 			System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::DataPoint^ dataPoint1 = (gcnew System::Windows::Forms::DataVisualization::Charting::DataPoint(18,
-				L"50,0"));
-			System::Windows::Forms::DataVisualization::Charting::DataPoint^ dataPoint2 = (gcnew System::Windows::Forms::DataVisualization::Charting::DataPoint(100,
-				L"25,0"));
+			System::Windows::Forms::DataVisualization::Charting::DataPoint^ dataPoint1 = (gcnew System::Windows::Forms::DataVisualization::Charting::DataPoint(0,
+				L"0,0"));
+			System::Windows::Forms::DataVisualization::Charting::DataPoint^ dataPoint2 = (gcnew System::Windows::Forms::DataVisualization::Charting::DataPoint(0,
+				L"0,0"));
+			System::Windows::Forms::DataVisualization::Charting::Title^ title1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Title());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea2 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^ legend2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^ series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::DataPoint^ dataPoint3 = (gcnew System::Windows::Forms::DataVisualization::Charting::DataPoint(0,
+				0));
+			System::Windows::Forms::DataVisualization::Charting::DataPoint^ dataPoint4 = (gcnew System::Windows::Forms::DataVisualization::Charting::DataPoint(0,
+				0));
+			System::Windows::Forms::DataVisualization::Charting::Title^ title2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Title());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->файлToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->открытьToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -176,6 +187,7 @@ namespace CppCLRWinformsProjekt {
 			this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
 			this->errorProvider1 = (gcnew System::Windows::Forms::ErrorProvider(this->components));
 			this->errorProvider2 = (gcnew System::Windows::Forms::ErrorProvider(this->components));
+			this->chart2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->menuStrip1->SuspendLayout();
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
@@ -189,6 +201,7 @@ namespace CppCLRWinformsProjekt {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
@@ -261,10 +274,13 @@ namespace CppCLRWinformsProjekt {
 			this->chart1->Location = System::Drawing::Point(4, 391);
 			this->chart1->Name = L"chart1";
 			series1->ChartArea = L"ChartArea1";
-			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Doughnut;
+			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Pie;
+			series1->LabelFormat = L"#.##%";
 			series1->Legend = L"Legend1";
 			series1->Name = L"Series1";
+			dataPoint1->LabelFormat = L"#.##%";
 			dataPoint1->LegendText = L"< 18";
+			dataPoint2->LabelFormat = L"#.##%";
 			dataPoint2->LegendText = L">= 18";
 			series1->Points->Add(dataPoint1);
 			series1->Points->Add(dataPoint2);
@@ -273,6 +289,9 @@ namespace CppCLRWinformsProjekt {
 			this->chart1->Size = System::Drawing::Size(635, 159);
 			this->chart1->TabIndex = 1;
 			this->chart1->Text = L"chart1";
+			title1->Name = L"Title1";
+			title1->Text = L"Процентное соотношение граждан по возрасту";
+			this->chart1->Titles->Add(title1);
 			// 
 			// dataGridView1
 			// 
@@ -332,6 +351,7 @@ namespace CppCLRWinformsProjekt {
 			// 
 			// tabPage4
 			// 
+			this->tabPage4->Controls->Add(this->chart2);
 			this->tabPage4->Controls->Add(this->label1);
 			this->tabPage4->Controls->Add(this->comboBox2);
 			this->tabPage4->Controls->Add(this->dataGridView2);
@@ -403,12 +423,16 @@ namespace CppCLRWinformsProjekt {
 			this->Column10->HeaderText = L"Изменение";
 			this->Column10->Name = L"Column10";
 			this->Column10->ReadOnly = true;
+			this->Column10->Text = L"Изменить";
+			this->Column10->UseColumnTextForButtonValue = true;
 			// 
 			// Column11
 			// 
 			this->Column11->HeaderText = L"Удаление";
 			this->Column11->Name = L"Column11";
 			this->Column11->ReadOnly = true;
+			this->Column11->Text = L"Удалить";
+			this->Column11->UseColumnTextForButtonValue = true;
 			// 
 			// tabPage2
 			// 
@@ -636,6 +660,30 @@ namespace CppCLRWinformsProjekt {
 			// 
 			this->errorProvider2->ContainerControl = this;
 			// 
+			// chart2
+			// 
+			chartArea2->Name = L"ChartArea1";
+			this->chart2->ChartAreas->Add(chartArea2);
+			legend2->Name = L"Legend1";
+			this->chart2->Legends->Add(legend2);
+			this->chart2->Location = System::Drawing::Point(0, 390);
+			this->chart2->Name = L"chart2";
+			series2->ChartArea = L"ChartArea1";
+			series2->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Pie;
+			series2->Legend = L"Legend1";
+			series2->Name = L"Series1";
+			dataPoint3->LegendText = L"< 18";
+			dataPoint4->LegendText = L"> 18";
+			series2->Points->Add(dataPoint3);
+			series2->Points->Add(dataPoint4);
+			this->chart2->Series->Add(series2);
+			this->chart2->Size = System::Drawing::Size(642, 166);
+			this->chart2->TabIndex = 3;
+			this->chart2->Text = L"chart2";
+			title2->Name = L"Title1";
+			title2->Text = L"Процентное соотношение граждан по возрасту в текущей квартире";
+			this->chart2->Titles->Add(title2);
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -665,10 +713,30 @@ namespace CppCLRWinformsProjekt {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		};
+	private: System::Void update_chart() {
+		double s = this->list_citizens->less18 + this->list_citizens->more18;
+		this->chart1->Series[0]->Points[0]->SetValueXY(this->list_citizens->less18 / s, this->list_citizens->less18);
+		this->chart1->Series[0]->Points[1]->SetValueXY(this->list_citizens->more18 / s, this->list_citizens->more18);
+		this->chart1->Series[0]->Points[0]->Label = std::trunc(this->list_citizens->less18 / s * 100.0).ToString() + "%";
+		this->chart1->Series[0]->Points[1]->Label = std::ceil(this->list_citizens->more18 / s * 100.0).ToString() + "%";
+		this->chart1->Refresh();
+
+		int index = this->comboBox2->SelectedIndex;
+		if (index != -1) {
+			citizen* owner = this->list_citizens->search_by_apartament_number(System::Convert::ToInt32(this->comboBox2->Items[index]));
+			s = owner->list_registered_citizens->less18 + owner->list_registered_citizens->more18;
+			this->chart2->Series[0]->Points[0]->SetValueXY(owner->list_registered_citizens->less18 / s, owner->list_registered_citizens->less18);
+			this->chart2->Series[0]->Points[1]->SetValueXY(owner->list_registered_citizens->more18 / s, owner->list_registered_citizens->more18);
+			this->chart2->Series[0]->Points[0]->Label = std::trunc(owner->list_registered_citizens->less18 / s * 100.0).ToString() + "%";
+			this->chart2->Series[0]->Points[1]->Label = std::ceil(owner->list_registered_citizens->more18 / s * 100.0).ToString() + "%";
+			this->chart2->Refresh();
+		}
+	}
 	private: System::Void открытьToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		switch (this->openFileDialog1->ShowDialog())
 		{
@@ -701,6 +769,7 @@ namespace CppCLRWinformsProjekt {
 					}
 					tmpc = tmpc->pNext;
 				} while (tmpc != NULL);
+				this->update_chart();
 			}
 			catch (...) {
 				System::Windows::Forms::MessageBox::Show("Неверный формат данных!", "Ошибка", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
@@ -800,6 +869,18 @@ namespace CppCLRWinformsProjekt {
 			if (!this->list_citizens->search_registered_citizen_by_all_data(number_apartament, tmp->fio, tmp->birth.year, tmp->birth.month, tmp->birth.day, tmp->target)) {
 				tmp->age = tmp->birth.get_age();
 				this->list_citizens->push_registered_citizen(number_apartament, tmp);
+				System::Windows::Forms::MessageBox::Show("Вы зарегистрировали жителя в данную квартиру!", "Успех", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
+				this->textBox8->Clear();
+				this->radioButton1->Checked = false;
+				this->radioButton2->Checked = false;
+				this->radioButton3->Checked = false;
+				this->dateTimePicker1->Value = System::DateTime::Now;
+				this->comboBox1->SelectedIndex = -1;
+				int index = this->comboBox2->SelectedIndex;
+				if (System::Convert::ToInt32(this->comboBox2->Items[index]) == number_apartament) {
+					dataGridView2->Rows->Add(msclr::interop::marshal_as<System::String^>(tmp->fio), msclr::interop::marshal_as<System::String^>(tmp->birth.to_string()), msclr::interop::marshal_as<System::String^>(tmp->target));
+				}
+				this->update_chart();
 			}
 			else {
 				this->errorProvider2->SetError(textBox8, "Такая запись уже существует!");
@@ -810,7 +891,59 @@ namespace CppCLRWinformsProjekt {
 		}
 	}
 	private: System::Void dataGridView2_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-
+		if (e->RowIndex > -1) {
+			switch (e->ColumnIndex) {
+			case 3:
+			{
+				System::Windows::Forms::DataGridViewRow^ row = dataGridView2->Rows[e->RowIndex];
+				int index = comboBox2->SelectedIndex;
+				int* number_apartament = new int(System::Convert::ToInt32(this->comboBox2->Items[index]));
+				System::DateTime^ dt = System::DateTime::ParseExact(row->Cells["Column6"]->Value->ToString(), msclr::interop::marshal_as<System::String^>("d.M.yyyy"), nullptr);
+				std::string fio = msclr::interop::marshal_as<std::string>(row->Cells["Column5"]->Value->ToString());
+				std::string target = msclr::interop::marshal_as<std::string>(row->Cells["Column7"]->Value->ToString());
+				registered_citizen* tmp = this->list_citizens->search_registered_citizen_by_all_data(*number_apartament, fio, dt->Year, dt->Month, dt->Day, target);
+				this->list_citizens->remove_registered_citizen_from_apartament(*number_apartament, tmp);
+				System::Windows::Forms::Form^ form = gcnew CppCLR_WinformsProjekt1::MyForm2(tmp, this->list_citizens, number_apartament);
+				form->ShowDialog();
+				this->list_citizens->push_registered_citizen(*number_apartament, tmp);
+				if (index != -1) {
+					dataGridView2->Rows->Clear();
+					citizen* owner = this->list_citizens->search_by_apartament_number(System::Convert::ToInt32(comboBox2->Items[index]));
+					node_registered_citizen* temp = owner->list_registered_citizens->head;
+					do {
+						if (temp->data != NULL) {
+							dataGridView2->Rows->Add(msclr::interop::marshal_as<System::String^>(temp->data->fio), msclr::interop::marshal_as<System::String^>(temp->data->birth.to_string()), msclr::interop::marshal_as<System::String^>(temp->data->target));
+						}
+						temp = temp->pNext;
+					} while (temp != NULL);
+				}
+				this->update_chart();
+				break;
+			}
+			case 4:
+			{
+				switch (System::Windows::Forms::MessageBox::Show("Вы уверены что хотите удалить данную запись? Запись будет утеряна навсегда", "Подтверждение пользователя", System::Windows::Forms::MessageBoxButtons::OKCancel, System::Windows::Forms::MessageBoxIcon::Question))
+				{
+				case System::Windows::Forms::DialogResult::OK:
+				{
+					System::Windows::Forms::DataGridViewRow^ row = dataGridView1->Rows[e->RowIndex];
+					int number_apartament = System::Convert::ToInt32(row->Cells["Column2"]->Value);
+					this->list_citizens->delete_by_apartament_number(number_apartament);
+					dataGridView1->Rows->Remove(row);
+					if (comboBox2->SelectedIndex == comboBox2->Items->IndexOf(number_apartament)) {
+						dataGridView2->Rows->Clear();
+					}
+					comboBox1->Items->Remove(number_apartament);
+					comboBox2->Items->Remove(number_apartament);
+					this->update_chart();
+					System::Windows::Forms::MessageBox::Show("Вы успешно удалили данную запись", "Успех", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
+				}
+				default:
+					break;
+				}
+			}
+			}
+		}
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->errorProvider1->Clear();
@@ -921,6 +1054,7 @@ namespace CppCLRWinformsProjekt {
 					}
 					comboBox1->Items->Remove(number_apartament);
 					comboBox2->Items->Remove(number_apartament);
+					this->update_chart();
 					System::Windows::Forms::MessageBox::Show("Вы успешно удалили данную запись", "Успех", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
 				}
 				default:
@@ -975,6 +1109,7 @@ private: System::Void comboBox2_SelectedIndexChanged(System::Object^ sender, Sys
 			temp = temp->pNext;
 		} while (temp != NULL);
 	}
+	this->update_chart();
 }
 };
 };
