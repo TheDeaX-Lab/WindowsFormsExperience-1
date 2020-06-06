@@ -169,6 +169,9 @@ node_citizen* node_citizen::delete_by_apartament_number(int apartament_number) {
 		node_citizen* tmp = this->pNext;
 		this->pNext = NULL;
 		delete this;
+		if (tmp == NULL) {
+			tmp = new node_citizen;
+		}
 		return tmp;
 	}
 	else
