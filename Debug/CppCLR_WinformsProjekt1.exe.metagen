@@ -27,7 +27,7 @@ Class CppCLR_WinformsProjekt1.MyForm: AutoLayout, AnsiClass, Class, Public, Befo
     Void .ctor(citizen*, list_citizen*): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class CppCLR_WinformsProjekt1.MyForm2: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
-    Void .ctor(registered_citizen*, list_citizen*, Int32*): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(registered_citizen*, list_citizen*, UInt32*): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class CppCLRWinformsProjekt.Form1: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

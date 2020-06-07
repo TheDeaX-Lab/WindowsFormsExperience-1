@@ -87,7 +87,8 @@ void node_registered_citizen::save_file(std::ofstream* fout) {
 			*fout << tmp->birth.day << '\n';
 			*fout << tmp->birth.month << '\n';
 			*fout << tmp->birth.year << '\n';
-			*fout << tmp->target << "n\n";
+			if (tmp->target == "") tmp->target = "n";
+			*fout << tmp->target << "\n";
 		}
 		temp = temp->pNext;
 	} while (temp != NULL);

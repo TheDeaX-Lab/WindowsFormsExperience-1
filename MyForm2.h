@@ -15,7 +15,7 @@ namespace CppCLR_WinformsProjekt1 {
 	public ref class MyForm2 : public System::Windows::Forms::Form
 	{
 	public:
-		MyForm2(registered_citizen* tmp, list_citizen* list_citizens, int* number_apartament_t)
+		MyForm2(registered_citizen* tmp, list_citizen* list_citizens, unsigned int* number_apartament_t)
 		{
 			InitializeComponent();
 			this->tmpr = tmp;
@@ -45,7 +45,9 @@ namespace CppCLR_WinformsProjekt1 {
 			this->textBox8->Text = msclr::interop::marshal_as<System::String^>(tmp->fio);
 			this->dateTimePicker1->Value = System::DateTime(tmp->birth.year, tmp->birth.month, tmp->birth.day);
 			//System::Windows::Forms::MessageBox::Show(System::Convert::ToString(*number_apartament_t), "Информация");
-			this->comboBox1->SelectedIndex = this->comboBox1->Items->IndexOf(*number_apartament_t);
+			int index = this->comboBox1->Items->IndexOf(*number_apartament_t);
+			this->comboBox1->SelectedIndex = index;
+			//this->comboBox1->SelectedItem = *number_apartament_t;
 			//
 			//TODO: добавьте код конструктора
 			//
@@ -64,7 +66,7 @@ namespace CppCLR_WinformsProjekt1 {
 		}
 	private: list_citizen* list_citizens;
 	private: registered_citizen* tmpr;
-	private: int* number_apartament_t;
+	private: unsigned int* number_apartament_t;
 	private: bool datetime_checked = true;
 	private: System::Windows::Forms::ComboBox^ comboBox1;
 	protected:
@@ -237,7 +239,7 @@ namespace CppCLR_WinformsProjekt1 {
 			this->Controls->Add(this->label9);
 			this->Controls->Add(this->textBox8);
 			this->Name = L"MyForm2";
-			this->Text = L"MyForm2";
+			this->Text = L"Редактор жителя";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider1))->EndInit();
